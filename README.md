@@ -7,7 +7,6 @@
 - Manage applicants
 
 ### Screenshots
-
-![Screenshot of LivingRoomArt](https://ibb.co/gwT2fat "LivingRoomArt")
+<img src="https://image.ibb.co/jdVF0a/Screen_Shot_2017_03_13_at_13_34_55.png" alt="LivingRoomArt" border="0">
 
 
