@@ -1,0 +1,59 @@
+<div class="container detailspace" ng-if="viewspace.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        {{viewspace.error_message}}
+      </p>
+      <p class="navigation">
+        <a ui-sref="spaces">← Back to all spaces</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container detailspace" ng-if="!viewspace.error_message">
+  <div class="col-sm-9 col-sm-offset-1">
+    <div class="" ng-if="viewspace.isSpaceOwner">
+      <button type="button"
+              class="btn btn-primary"
+              ng-click="viewspace.editSpace(viewspace.space._id)">Edit Space
+      </button>
+      <button type="button"
+              class="btn btn-danger"
+              ng-click="viewspace.deleteSpace(viewspace.space._id)">Delete Space
+      </button>
+    </div>
+    <p class="navigation">
+      <a ui-sref="spaces">← Back to all spaces</a>
+    </p>
+    <div class="row">
+      <div class="col-md-5 spaceinfo">
+        <h1 class="spacename">{{viewspace.space.name}}</h1>
+        <span><b>Available from:</b><span> {{viewspace.space.from | date : 'M/d/yy h:mm a'}}</span></span><br />
+        <span><b>Available until:</b><span> {{viewspace.space.to | date : 'M/d/yy h:mm a'}}</span></span><br />
+        <span ng-if="viewspace.difference"><b>Days: </b><span> {{viewspace.difference}}</span></span><br />
+        <b>Size:</b> <span> {{viewspace.space.squareMeters}}m&sup2;</span><br />
+        <b>Cost:</b> <span> {{viewspace.space.cost}} €</span><br />
+        <b>Where:</b> <a ng-href="http://maps.google.com/?q={{viewspace.address}}" target="_blank">
+          <span>{{viewspace.space.street}} {{viewspace.space.housenumber}}</span>,
+          <span>{{viewspace.space.city}}</span>,
+          <span>{{viewspace.space.country}}</span>
+        </a>
+      </div>
+      <div ng-if="viewspace.space.picture" class="col-md-7 spaceimage">
+        <img ng-src="{{viewspace.space.picture}}" alt="Space image" />
+      </div>
+    </div>
+
+    <div class="spacedescription">
+      <p ng-bind-html="viewspace.space.description">
+      </p>
+    </div>
+    <div class="spaceapply">
+      <h3>Apply for this space</h3>
+      <p>
+        Write an E-Mail to <a href="mailto:{{viewspace.space.email}}">{{viewspace.space.email}}</a> to apply for this space for your next event.
+      </p>
+    </div>
+  </div>
+</div>

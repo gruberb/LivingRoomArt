@@ -1,0 +1,18 @@
+<div ng-if="viewprofile.user.aboutme" class="userdescription">
+  <p ng-bind-html="viewprofile.user.aboutme">
+  </p>
+</div>
+<div ng-if="!viewprofile.user.aboutme && viewprofile.isOwner" class="userenter">
+  <h3>Enter some data!</h3>
+  <p>
+    Give your visitors a few informations about you.
+    <a href="" ng-click="viewprofile.editProfile(viewprofile.user._id)">Edit your profile here</a>,
+    and make sure people can find you and your art.
+  </p>
+</div>
+<div ng-if="!viewprofile.user.aboutme && !viewprofile.isOwner" class="userenter">
+  <h3>No user information yet!</h3>
+  <p>
+    This user hasn't shared any information yet. But stay put, there will be some amazing text very soon!
+  </p>
+</div>

@@ -1,0 +1,19 @@
+html,
+body {
+  font-family: $normalfont;
+  font-size: $font-size;
+}
+
+p,
+span,
+button,
+a,
+li,
+input {
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+.navbar {
+  border-radius: 0px !important;
+}

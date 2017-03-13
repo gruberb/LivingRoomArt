@@ -1,0 +1,39 @@
+<div class="container addopencall" ng-if="!isLoggedIn">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        You need to be logged in to apply for an OpenCall!
+      </p>
+      <p class="navigation">
+        <a ui-sref="opencalls">← Back to all OpenCalls</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container applyopencall" ng-if="isLoggedIn">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1>{{applyopencall.opencall.name}}</h1>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="message" class="col-sm-4 control-label">Text for E-Mail</label>
+        <div class="col-sm-8">
+          <trix-editor angular-trix id="message" ng-model="applyopencall.message"></trix-editor>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+          <button type="button"
+                  class="btn btn-success"
+                  ng-disabled="!applyopencall.message"
+                  ng-click="applyopencall.apply(applyopencall.message)">Apply
+          </button>
+          <button type="button"
+                  class="btn btn-default"
+                  ui-sref="viewopencall({opencallID: applyopencall.opencall._id})">Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

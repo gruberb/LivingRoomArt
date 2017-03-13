@@ -1,0 +1,92 @@
+<div class="container editproject" ng-if="editproject.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        {{editproject.error_message}}
+      </p>
+      <p class="navigation">
+        <a ui-sref="viewprofile.about({ userID: editproject.project.userID })">← Back to artist view</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container editproject" ng-if="!editproject.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1>{{editproject.project.name}}</h1>
+    <form class="form-horizontal" ng-submit="editproject.saveProject(editproject.project)">
+      <div class="form-group">
+        <label for="name" class="col-sm-4 control-label">Project name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="name" ng-model="editproject.project.name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="file" class="col-sm-4 control-label">Project photos <br /> (not bigger than 3MB each)</label>
+        <div class="col-sm-8 image-upload">
+          <img ngf-src="editproject.project.picture">
+          <input ngf-select
+                  id="file"
+                  type="file"
+                  ngf-capture="'camera'"
+                  ng-model="editproject.project.picture"
+                  ngf-accept="'image/*'"
+                  ngf-max-size="3MB"
+                  ngf-resize="{width: 200, height: 200, quality: .8, type: 'image/jpeg',
+                    ratio: '1:2', centerCrop: true, pattern='.jpg'}">
+          <input ng-if="editproject.project.picture" type="button" name="remove_image" value="Remove" ng-click="editproject.removeImage()">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="website" class="col-sm-4 control-label">Url to project</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="website" ng-model="editproject.project.url" placeholder="https://www.website-of-project.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="from" class="col-sm-4 control-label">Happened From</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="from" ng-model="editproject.project.from" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="to" class="col-sm-4 control-label">Until</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="to" ng-model="editproject.project.to" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="col-sm-4 control-label">Description</label>
+        <div class="col-sm-8">
+          <trix-editor angular-trix id="description" ng-model="editproject.project.description"></trix-editor>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category" class="col-sm-4 control-label">Category</label>
+        <div class="col-sm-8">
+          <div class="radio" ng-class='{ category_checked: (category == editproject.project.category) }' ng-repeat="category in editproject.categories">
+            <label>
+              <input
+                  type="radio"
+                  name="category"
+                  value="{{category}}"
+                  ng-model="editproject.project.category"
+                  required> {{category}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+          <button type="submit"
+                  class="btn btn-success">Save
+          </button>
+          <button type="button"
+                  class="btn btn-default"
+                  ng-click="editproject.goBack()">Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

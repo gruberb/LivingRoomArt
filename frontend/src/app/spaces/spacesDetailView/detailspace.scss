@@ -1,0 +1,96 @@
+.detailspace {
+  .row {
+    padding-bottom: 20px;
+  }
+
+  .spaceimage {
+    img {
+      margin-top: 25px;
+      width : 100%;
+      float: right;
+    }
+  }
+
+  .errormessage {
+    padding: 20px 20px 10px 20px;
+    overflow: hidden;
+    color: #777;
+    margin: 25px 0;
+    background-color: #efefef;
+  }
+
+  .spacename {
+    margin-bottom: 25px;
+  }
+
+  .spaceinfo {
+    height: 100%;
+    font-family: $normalfont;
+    font-weight: normal;
+    padding-bottom: 5px;
+  }
+
+  .spacedescription {
+    padding-top: 25px;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .spaceapply {
+    padding: 20px 20px 15px 20px;
+    overflow: hidden;
+    color: #000;
+    margin: 50px 0;
+    background-color: #efefef;
+
+    h3  {
+      margin-top: 10px;
+    }
+  }
+
+  .navigation {
+    margin-top: 20px;
+
+    a {
+      color: #39c;
+      text-decoration: underline;
+
+      &:hover {
+        background-color: #0066cc;
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .btn {
+    font-weight: bold;
+    text-shadow: 0 1px 0 #1963a2;
+    color: white;
+    text-decoration: none;
+    font-size: 1.3rem;
+    padding: 8px 15px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: #2192f1;
+    border-bottom: 3px solid #104978;
+
+    &:hover {
+      background-color: #104978;
+      border-bottom: 3px solid #08243c;
+    }
+  }
+
+  .btn-danger {
+    background-color: #c00;
+    border-bottom: 3px solid #900;
+
+    &:hover {
+      background-color: #900;
+      border-bottom: 3px solid #600;
+    }
+  }
+}

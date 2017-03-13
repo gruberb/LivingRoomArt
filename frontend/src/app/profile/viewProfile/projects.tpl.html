@@ -1,0 +1,50 @@
+<div ng-if="viewprofile.user.projects.length > 0" class="projectlist">
+  <div ng-repeat="project in viewprofile.user.projects | orderBy:'-from'" class="projectentry">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>{{ project.name }} <small>{{ project.category }}</small></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <p>
+          <span>{{ project.from | date : 'MMM d yyyy' }}</span><span ng-if="project.to"> - {{ project.to | date : 'MMM d yyyy' }}</span>
+        </p>
+        <p>
+          <a ng-href="{{ project.url }}">{{ project.url }}</a>
+        </p>
+        <p ng-bind-html="project.description">
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <img ng-if="project.picture" ng-src="{{ project.picture }}" alt="Project image" />
+      </div>
+    </div>
+    <div ng-if="viewprofile.isOwner &&!viewprofile.isPreview" class="row">
+      <div class="col-sm-12">
+        <button type="button"
+            class="btn btn-primary"
+            ng-click="viewprofile.editProject(project._id)">Edit Project
+        </button>
+        <button type="button"
+            class="btn btn-danger"
+            ng-click="viewprofile.deleteProject(project._id)">Remove Project
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-if="!viewprofile.user.projects.length > 0 && viewprofile.isOwner && !viewprofile.isPreview" class="userenter">
+  <h3>List some projects!</h3>
+  <p>
+    Give your visitors a few informations about your experience.
+    <a href="" ui-sref="addproject">Add your project here</a>,
+    and make sure people can find your art.
+  </p>
+</div>
+<div ng-if="!viewprofile.user.projects.length > 0 && !viewprofile.isOwner && viewprofile.isPreview" class="userenter">
+  <h3>No projects yet to look at!</h3>
+  <p>
+    Sadly, this artist doesn't have any listed projects. But stay put, this person will propably have something to show very soon!
+  </p>
+</div>

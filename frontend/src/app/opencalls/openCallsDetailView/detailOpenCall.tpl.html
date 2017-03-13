@@ -1,0 +1,85 @@
+<div class="container detailopencall" ng-if="viewopencall.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        {{viewopencall.error_message}}
+      </p>
+      <p class="navigation">
+        <a ui-sref="opencalls">← Back to all OpenCalls</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container detailopencall" ng-if="!viewopencall.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="" ng-if="viewopencall.isOpenCallOwner">
+      <button type="button"
+              class="btn btn-success"
+              ui-sref="manageopencall({opencallID: viewopencall.opencall._id})">Manage Applicants
+      </button>
+      <button type="button"
+              class="btn btn-primary"
+              ui-sref="editopencall({opencallID: viewopencall.opencall._id})">Edit OpenCall
+      </button>
+      <button type="button"
+              class="btn btn-danger"
+              ng-click="viewopencall.deleteOpenCall(viewopencall.opencall._id)">Delete OpenCall
+      </button>
+    </div>
+    <p class="navigation">
+      <a ui-sref="opencalls">← Back to all OpenCalls</a>
+    </p>
+    <div class="row">
+      <div class="col-md-5 opencallinfo">
+        <h1 class="opencallname">{{viewopencall.opencall.name}}</h1>
+        <div class="opencalltime">
+          <p><b>From:</b> {{viewopencall.opencall.from | date: 'EEEE, MMM d, y h:mm a'}}</p>
+          <p><b>To:</b> {{viewopencall.opencall.to | date: 'EEEE, MMM d, y h:mm a'}}</p>
+        </div>
+        <div ng-if="viewopencall.opencall.street" class="opencallplace">
+          <b>Where:</b> <a ng-href="http://maps.google.com/?q={{viewopencall.address}}" target="_blank">
+            <span>{{viewopencall.opencall.street}} {{viewopencall.opencall.housenumber}}</span>,
+            <span>{{viewopencall.opencall.city}}</span>,
+            <span>{{viewopencall.opencall.country}}</span>
+          </a>
+        </div>
+      </div>
+      <div ng-if="viewopencall.opencall.picture" class="col-md-7 opencallimage">
+        <img ng-src="{{viewopencall.opencall.picture}}" alt="Event image" />
+      </div>
+    </div>
+    <div class="opencalldescription">
+      <p ng-bind-html="viewopencall.opencall.description">
+      </p>
+    </div>
+    <div class="opencallapply" ng-if="!isLoggedIn">
+      <h3>Apply for this OpenCall</h3>
+      <p>
+        Please <a ui-sref="login">login</a> or <a ui-sref="register">register</a> to apply for this OpenCall!
+      </p>
+    </div>
+    <div class="opencallapply" ng-if="!viewopencall.hasApplied && !viewopencall.isOpenCallOwner && isLoggedIn">
+      <h3>Apply for this OpenCall</h3>
+      <p>
+        Click here to apply for this OpenCall!
+        <button type="button"
+                class="btn btn-warning"
+                ui-sref="applyopencall({opencallID: viewopencall.opencall._id})">Apply
+        </button>
+      </p>
+    </div>
+    <div class="opencallapply" ng-if="viewopencall.hasApplied && !viewopencall.isOpenCallOwner && isLoggedIn">
+      <h3>You have applied for this OpenCall!</h3>
+      <p>
+        Congrats! You already have applied for this OpenCall! Please <a ng-href="mailto:{{viewopencall.opencall.email}}?subject=[LivingRoomArt] Question about {{viewopencall.opencall.name}}">contact the organiser</a> if you have futher questions.
+      </p>
+    </div>
+    <div class="opencallapply" ng-if="viewopencall.isOpenCallOwner">
+      <h3>That's your OpenCall!</h3>
+      <p>
+        No way to apply for your own OpenCall.
+      </p>
+    </div>
+  </div>
+</div>

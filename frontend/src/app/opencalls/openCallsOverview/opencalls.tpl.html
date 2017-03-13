@@ -1,0 +1,16 @@
+<div class="container opencallsoverview">
+  <h1>OpenCalls <small>{{allopencalls.opencalls.length}}</small></h1>
+  <nav>
+    <input id="search_term" name="term" placeholder="Search: name, category, city…" type="text" ng-model="search">
+  </nav>
+  <ul class="opencallslist">
+    <li ng-repeat="opencall in allopencalls.opencalls | orderBy:'from' | filter: search" ui-sref="viewopencall({opencallID: opencall._id})">
+      <span class="opencallcategory">{{opencall.category}}</span>
+      <span class="opencallname">{{opencall.name}}</span>
+      <div class="right">
+        <span class="opencalldate hidden-xs">{{opencall.from | date : shortDate}}</span>
+        <span class="opencallcity">{{opencall.city}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

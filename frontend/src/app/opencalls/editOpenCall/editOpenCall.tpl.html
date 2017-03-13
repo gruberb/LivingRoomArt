@@ -1,0 +1,142 @@
+<div class="container editopencall" ng-if="editopencall.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        {{editopencall.error_message}}
+      </p>
+      <p class="navigation">
+        <a ui-sref="events">← Back to all Events</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="container editopencall" ng-if="!editopencall.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1>{{editopencall.opencall.name}}</h1>
+    <form class="form-horizontal" ng-submit="editopencall.saveOpenCall(editopencall.opencall)">
+      <div class="form-group">
+        <label for="eventName" class="col-sm-4 control-label">Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="eventName" placeholder="Name for your Event" ng-model="editopencall.opencall.name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
+        <div class="col-sm-8">
+          <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="editopencall.opencall.email" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="file" class="col-sm-4 control-label">Event image <br /> (not bigger than 3MB)</label>
+        <div class="col-sm-8 image-upload">
+          <img ngf-src="editopencall.opencall.picture">
+          <input ngf-select
+                  id="file"
+                  type="file"
+                  ngf-capture="'camera'"
+                  ng-model="editopencall.opencall.picture"
+                  ngf-accept="'image/*'"
+                  ngf-max-size="3MB"
+                  ngf-resize="{width: 200, height: 200, quality: .8, type: 'image/jpeg',
+                    ratio: '1:2', centerCrop: true, pattern='.jpg'}">
+          <input ng-if="editopencall.opencall.picture" type="button" name="remove_image" value="Remove" ng-click="editopencall.removeImage()">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="street" class="col-sm-4 control-label">Streetname + Housenr.</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="street" placeholder="Superstreet" ng-model="editopencall.opencall.street" required>
+        </div>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" id="housenumber" placeholder="98" ng-model="editopencall.opencall.housenumber" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city" class="col-sm-4 control-label">City + ZIP</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="city" placeholder="Berlin" ng-model="editopencall.opencall.city" required>
+        </div>
+        <div class="col-sm-2">
+          <input type="number" class="form-control" id="zip" placeholder="10406" ng-model="editopencall.opencall.zip" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">Country</label>
+        <div class="col-sm-8">
+          <select class="form-control" ng-options="country for country in editopencall.countries" ng-model="editopencall.opencall.country" required></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">From</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="from" ng-model="editopencall.opencall.from" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">To</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="to" ng-model="editopencall.opencall.to" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone" class="col-sm-4 control-label">Phone</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="phone" placeholder="+49 151 135143"  ng-model="editopencall.opencall.phone">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cost" class="col-sm-4 control-label">Cost</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <div class="input-group-addon">€</div>
+            <input type="number" class="form-control" id="cost" placeholder="Event cost per participant" ng-model="editopencall.opencall.cost" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="website" class="col-sm-4 control-label">Website</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="website" ng-model="editopencall.opencall.url" placeholder="https://www.website-of-opencall.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="col-sm-4 control-label">Description</label>
+        <div class="col-sm-8">
+          <trix-editor angular-trix id="description" ng-model="editopencall.opencall.description"></trix-editor>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category" class="col-sm-4 control-label">Category</label>
+        <div class="col-sm-8">
+          <div class="radio" ng-class='{ category_checked: (category == editopencall.opencall.category) }' ng-repeat="category in editopencall.categories">
+            <label>
+              <input
+                  type="radio"
+                  name="category"
+                  value="{{category}}"
+                  ng-model="editopencall.opencall.category"
+                  required> {{category}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+          <button type="submit"
+                  class="btn btn-success">Save
+          </button>
+          <button type="button"
+                  class="btn btn-danger"
+                  ng-click="editopencall.deleteOpenCall(editopencall.opencall._id)">Delete
+          </button>
+          <button type="button"
+                  class="btn btn-default"
+                  ui-sref="viewopencall({opencallID: editopencall.opencall._id})">Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

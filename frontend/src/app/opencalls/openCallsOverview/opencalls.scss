@@ -1,0 +1,66 @@
+.opencallsoverview {
+  h1 {
+    cursor: default;
+    font-family: $mediumfont;
+    letter-spacing: 5px;
+    color: #c00;
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+
+  nav {
+    overflow: hidden;
+    background-color: #efefef;
+    padding: 15px 30px;
+    border-radius: 50px;
+    margin-bottom: 25px;
+    margin-left: -31px;
+    width: 105%;
+
+    input {
+      float: left;
+      font-size: 1rem;
+      background: url(images/search-icon.png) 10px 16px no-repeat #fff;
+      padding: 8px 8px 8px 30px;
+      cursor: auto;
+      width: 98%;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+  }
+
+  .opencallslist {
+    list-style: none;
+    padding-left: 0px;
+
+    li {
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+
+      &:nth-child(2) {
+        background-color: rgb(248, 248, 248);
+      };
+
+      &:hover {
+        background-color: #ffc;
+      }
+
+      .opencallcategory {
+        font-family: $boldfont;
+        margin-right: 10px;
+      }
+
+      .opencalldate {
+        padding-right: 25px;
+      }
+
+      .right {
+        float: right;
+        color: #AA9C84;
+        padding-top: 4px;
+      }
+    }
+  }
+}

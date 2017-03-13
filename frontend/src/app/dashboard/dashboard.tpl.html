@@ -1,0 +1,73 @@
+<div class="container addevent" ng-if="!isLoggedIn">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        You need to be logged in to have access to your dashboard!
+      </p>
+      <p class="navigation">
+        <a ui-sref="events">← Back to the events view</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="container dashboard" ng-if="isLoggedIn">
+  <h1>My next events <small>{{dashboard.attendevents.length}}</small></h1>
+  <ul class="list">
+    <li ng-repeat="_event in dashboard.attendevents | orderBy:'from'" ui-sref="viewevent({eventID: _event._id})">
+      <span class="category">{{_event.category}}</span>
+      <span class="name">{{_event.name}}</span>
+      <div class="right">
+        <span class="date hidden-xs">{{_event.from | date : shortDate}}</span>
+        <span class="city">{{_event.city}}</span>
+      </div>
+    </li>
+  </ul>
+  <h1>OpenCalls I've applied <small>{{dashboard.opencalls.length}}</small></h1>
+  <ul class="list">
+    <li ng-repeat="opencall in dashboard.opencalls | orderBy:'from'" ui-sref="viewopencall({opencallID: opencall._id})">
+      <span class="category">{{opencall.category}}</span>
+      <span class="name">{{opencall.name}}</span>
+      <div class="right">
+        <span class="date hidden-xs">{{opencall.from | date : shortDate}}</span>
+        <span class="city">{{opencall.city}}</span>
+      </div>
+    </li>
+  </ul>
+  <h1>Events I host <small>{{dashboard.ownevents.length}}</small></h1>
+  <ul class="list">
+    <li ng-repeat="ownevent in dashboard.ownevents | orderBy:'from'" ui-sref="viewevent({eventID: ownevent._id})">
+      <span class="category">{{ownevent.category}}</span>
+      <span class="name">{{ownevent.name}}</span>
+      <div class="right">
+        <span class="date hidden-xs">{{ownevent.from | date : shortDate}}</span>
+        <span class="city">{{ownevent.city}}</span>
+      </div>
+    </li>
+  </ul>
+  <h1>My OpenCalls <small>{{dashboard.ownopencalls.length}}</small></h1>
+  <ul class="list">
+    <li ng-repeat="ownopencall in dashboard.ownopencalls | orderBy:'from'" ui-sref="viewopencall({opencallID: ownopencall._id})">
+      <span class="category">{{ownopencall.category}}</span>
+      <span class="name">{{ownopencall.name}}</span>
+      <div class="right">
+        <span class="date hidden-xs">{{ownopencall.from | date : shortDate}}</span>
+        <span class="city">{{ownopencall.city}}</span>
+      </div>
+    </li>
+  </ul>
+  <h1>My Spaces <small>{{dashboard.spaces.length}}</small></h1>
+  <ul class="list">
+    <li ng-repeat="space in dashboard.spaces | orderBy:'from'" ui-sref="viewspace({spaceID: space._id})">
+      <span class="category">{{space.category}}</span>
+      <span class="name">{{space.name}}</span>
+      <div class="right">
+        <span class="date hidden-xs">{{space.from | date : 'MMM d'}} - {{space.to | date : 'MMM d'}} </span>
+        <span class="size hidden-xs">{{space.squareMeters}}m&sup2; </span>
+        <span class="cost hidden-xs">{{space.cost}}€ </span>
+        <span class="city">{{space.city}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

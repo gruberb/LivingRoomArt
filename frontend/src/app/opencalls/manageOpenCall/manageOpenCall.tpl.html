@@ -1,0 +1,79 @@
+<div class="container manageopencall" ng-if="manageopencall.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        {{manageopencall.error_message}}
+      </p>
+      <p class="navigation">
+        <a ui-sref="opencalls">← Back to all OpenCalls</a>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="manageopencall container" ng-if="!manageopencall.error_message">
+  <p class="navigation">
+    <a ui-sref="viewopencall({ opencallID: manageopencall.opencall._id })">← Back to {{ manageopencall.opencall.name }}</a>
+  </p>
+  <h1>Open Applications <small>{{manageopencall.opencall.applicants.length}}</small></h1>
+  <div class="col-md-4 listview" ng-class="manageopencall.applicant ? 'active' : 'not-actice'">
+    <ul ng-if="manageopencall.opencall.accepted.length > 0" class="applicants accepted">
+      <li ng-class="manageopencall.applicant._id === accepted.userID ? 'active' : 'not-actice'"
+          ng-repeat="accepted in manageopencall.opencall.accepted"
+          ng-click="manageopencall.showDetails(accepted)">
+        <span>{{ accepted.name }}</span><br />
+        <span>{{ accepted.email }}</span><br />
+        <span>{{ accepted.status }}</span>
+      </li>
+    </ul>
+    <ul ng-if="manageopencall.opencall.rejected.length > 0" class="applicants rejected">
+      <li ng-class="manageopencall.applicant._id === rejected.userID ? 'active' : 'not-actice'"
+          ng-repeat="rejected in manageopencall.opencall.rejected"
+          ng-click="manageopencall.showDetails(rejected)">
+        <span>{{ rejected.name }}</span><br />
+        <span>{{ rejected.email }}</span><br />
+        <span>{{ rejected.status }}</span>
+      </li>
+    </ul>
+    <ul ng-if="manageopencall.opencall.applicants.length > 0" class="applicants">
+      <li ng-class="manageopencall.applicant._id === applicant.userID ? 'active' : 'not-actice'"
+          ng-repeat="applicant in manageopencall.opencall.applicants"
+          ng-click="manageopencall.showDetails(applicant)">
+        <span>{{ applicant.name }}</span><br />
+        <span>{{ applicant.email }}</span><br />
+        <span>{{ applicant.status }}</span>
+      </li>
+    </ul>
+  </div>
+  <div ng-if="manageopencall.applicant" class="col-md-8 detailview">
+    <div ng-if="manageopencall.applicant.status == 'open'" class="row navigation">
+      <div class="col-md-6">
+        <button type="button"
+          class="btn btn-success"
+          ng-click="manageopencall.accept(manageopencall.applicant)">Accept
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="manageopencall.reject(manageopencall.applicant)">Reject
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h2>{{ manageopencall.applicant.firstName }} {{ manageopencall.applicant.lastName }}</h2>
+      <span ng-if="manageopencall.applicant.email"><b>E-Mail:</b><span> <a ng-href="mailto:{{manageopencall.applicant.email}}">{{manageopencall.applicant.email}}</a></span></span><br />
+      <b ng-if="manageopencall.applicant.url">Website:</b> <span> <a ng-href="http://{{manageopencall.applicant.url}}">{{manageopencall.applicant.url}}</a></span><br />
+      <p class="navigation">
+        <a ui-sref="viewprofile.about({userID: manageopencall.applicant._id})">→ Go to user profile</a>
+      </p>
+    </div>
+    <div class="col-md-6 userphoto">
+      <img ng-if="manageopencall.applicant.profilePhoto" ng-src="{{ manageopencall.applicant.profilePhoto }}" alt="Profile photo" />
+    </div>
+    <div class="col-md-12 info">
+      <p ng-bind-html="manageopencall.applicant.message">
+      </p>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,146 @@
+.detailsevent {
+  .eventinfo {
+    height: 100%;
+  }
+
+  .eventimage {
+    img {
+      margin-top: 25px;
+      width : 100%;
+      float: right;
+    }
+  }
+
+  .eventname {
+    font-family: $mediumfont;
+    margin-bottom: 25px;
+  }
+
+  .errormessage {
+    padding: 20px 20px 10px 20px;
+    overflow: hidden;
+    color: #777;
+    margin: 25px 0;
+    background-color: #efefef;
+  }
+
+  .eventtime {
+    font-family: $normalfont;
+    font-weight: normal;
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .eventplace {
+    font-family: $normalfont;
+    font-weight: normal;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+
+    span {
+      font-size: 0.9rem;
+    }
+  }
+  .eventdescription {
+    padding-top: 25px;
+    border-top: 1px solid #e8e8e8;
+  }
+  .navigation {
+    margin-top: 20px;
+
+    a {
+      color: #39c;
+      text-decoration: underline;
+
+      &:hover {
+        background-color: #0066cc;
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .eventapply {
+    padding: 20px 20px 15px 20px;
+    overflow: hidden;
+    color: #000;
+    margin: 50px 0;
+    background-color: #efefef;
+
+    h3  {
+      margin-top: 10px;
+    }
+  }
+
+  .attendees {
+    max-height: 400px;
+
+    h2 {
+      padding-left: 10px;
+    }
+
+    span {
+      display: block;
+      padding: 10px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #ffc;
+      }
+    }
+  }
+
+  .btn {
+    font-weight: bold;
+    text-shadow: 0 1px 0 #1963a2;
+    color: white;
+    text-decoration: none;
+    font-size: 1.3rem;
+    padding: 8px 15px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: #2192f1;
+    border-bottom: 3px solid #104978;
+
+    &:hover {
+      background-color: #104978;
+      border-bottom: 3px solid #08243c;
+    }
+  }
+
+  .btn-danger {
+    background-color: #c00;
+    border-bottom: 3px solid #900;
+
+    &:hover {
+      background-color: #900;
+      border-bottom: 3px solid #600;
+    }
+  }
+
+  .btn-warning {
+    background-color: #00b200;
+    border-bottom: 3px solid #007f00;
+
+    &:hover {
+      background-color: #007f00;
+      border-bottom: 3px solid #001900;
+    }
+  }
+
+  .btn-success {
+    background-color: #6ec06e;
+    border-bottom: 3px solid #398439;
+
+    &:hover {
+      background-color: #398439;
+      border-bottom: 3px solid #163416;
+    }
+  }
+}

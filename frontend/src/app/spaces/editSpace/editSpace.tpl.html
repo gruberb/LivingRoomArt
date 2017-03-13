@@ -1,0 +1,151 @@
+<div class="container editspace" ng-if="editspace.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        {{editspace.error_message}}
+      </p>
+      <p class="navigation">
+        <a ui-sref="spaces">← Back to all spaces</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container editspace" ng-if="!editspace.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1>{{editspace.space.name}}</h1>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="spaceName" class="col-sm-4 control-label">Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="spaceName" placeholder="Name of your space" ng-model="editspace.space.name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
+        <div class="col-sm-8">
+          <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="editspace.space.email" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="file" class="col-sm-4 control-label">Space image <br /> (not bigger than 3MB)</label>
+        <div class="col-sm-8 image-upload">
+          <img ngf-src="editspace.space.picture">
+          <input ngf-select
+                  id="file"
+                  type="file"
+                  ngf-capture="'camera'"
+                  ng-model="editspace.space.picture"
+                  ngf-accept="'image/*'"
+                  ngf-max-size="3MB"
+                  ngf-resize="{width: 200, height: 200, quality: .8, type: 'image/jpeg',
+                    ratio: '1:2', centerCrop: true, pattern='.jpg'}">
+          <input ng-if="editspace.space.picture" type="button" name="remove_image" value="Remove" ng-click="editspace.removeImage()">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="street" class="col-sm-4 control-label">Streetname + Housenr.</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="street" placeholder="Superstreet" ng-model="editspace.space.street" required>
+        </div>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" id="housenumber" placeholder="98" ng-model="editspace.space.housenumber" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city" class="col-sm-4 control-label">City + ZIP</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="city" placeholder="Berlin" ng-model="editspace.space.city" required>
+        </div>
+        <div class="col-sm-2">
+          <input type="number" class="form-control" id="zip" placeholder="10406" ng-model="editspace.space.zip" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">Country</label>
+        <div class="col-sm-8">
+          <select class="form-control" ng-options="country for country in editspace.countries" ng-model="editspace.space.country" required></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">Available From</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="from" ng-model="editspace.space.from" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">Available To</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="to" ng-model="editspace.space.to" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="size" class="col-sm-4 control-label">Size</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <div class="input-group-addon">m&sup2;</div>
+            <input type="number" class="form-control" id="size" placeholder="52" ng-model="editspace.space.squareMeters" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cost" class="col-sm-4 control-label">Cost</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <div class="input-group-addon">€</div>
+            <input type="number" class="form-control" id="cost" placeholder="Cost" ng-model="editspace.space.cost" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone" class="col-sm-4 control-label">Phone</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="phone" placeholder="+49 151 135143"  ng-model="editspace.space.phone">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="website" class="col-sm-4 control-label">Website</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="website" ng-model="editspace.space.url" placeholder="https://www.website-of-space.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="col-sm-4 control-label">Description</label>
+        <div class="col-sm-8">
+          <trix-editor angular-trix id="description" ng-model="editspace.space.description"></trix-editor>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category" class="col-sm-4 control-label">Category</label>
+        <div class="col-sm-8">
+          <div class="radio" ng-class='{ category_checked: (category == editspace.space.category) }' ng-repeat="category in editspace.categories">
+            <label>
+              <input
+                  type="radio"
+                  name="category"
+                  value="{{category}}"
+                  ng-model="editspace.space.category"
+                  required> {{category}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+          <button type="button"
+                  class="btn btn-success"
+                  ng-click="editspace.saveSpace(editspace.space)">Save
+          </button>
+          <button type="button"
+                  class="btn btn-danger"
+                  ng-click="editspace.deleteSpace(editspace.space._id)">Delete
+          </button>
+          <button type="button"
+                  class="btn btn-default"
+                  ng-click="editspace.goBack(editspace.space._id)">Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

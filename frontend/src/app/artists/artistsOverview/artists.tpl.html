@@ -1,0 +1,15 @@
+<div class="container artistsoverview">
+  <h1>Artists <small>{{allartists.artists.length}}</small></h1>
+  <nav>
+    <input id="search_term" name="term" placeholder="Search: name, type, city…" type="text" ng-model="search">
+  </nav>
+  <ul class="artistslist">
+    <li ng-repeat="artist in allartists.artists | orderBy:'firstName' | filter: search" ng-click="allartists.artistDetails(artist)">
+      <span class="artistcategory">{{artist.category}}</span>
+      <span class="artistname">{{artist.firstName}} {{artist.lastName}}</span>
+      <div class="right">
+        <span class="artistcity">{{artist.city}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

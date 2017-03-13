@@ -1,0 +1,150 @@
+<div class="container addevent" ng-if="!isLoggedIn">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        You need to be logged in to create a new space!
+      </p>
+      <p class="navigation">
+        <a ui-sref="spaces">← Back to the spaces overview</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container addspace" ng-if="isLoggedIn">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1>Manage a new space</h1>
+    <p class="lead">By creating your own space, you have the <b>option to offer it to artists</b>, or just <b>manage your own events</b>. Visitors can search and find your space, and also make an request for their next event.</p>
+    <p class="lead">You see, creating your space in livingroomart is a great first step to collaborate with other artists.</p>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="spaceName" class="col-sm-4 control-label">Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="spaceName" placeholder="Name of your space" ng-model="addspace.space.name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
+        <div class="col-sm-8">
+          <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="addspace.space.email" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="file" class="col-sm-4 control-label">Space image <br /> (not bigger than 3MB)</label>
+        <div class="col-sm-8 image-upload">
+          <img ngf-src="addspace.space.picture">
+          <input ngf-select
+                  id="file"
+                  type="file"
+                  ngf-capture="'camera'"
+                  ng-model="addspace.space.picture"
+                  ngf-accept="'image/*'"
+                  ngf-max-size="3MB"
+                  ngf-resize="{width: 200, height: 200, quality: .8, type: 'image/jpeg',
+                    ratio: '1:2', centerCrop: true, pattern='.jpg'}">
+          <input ng-if="addspace.space.picture" type="button" name="remove_image" value="Remove" ng-click="addspace.removeImage()">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="street" class="col-sm-4 control-label">Streetname + Housenr.</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="street" placeholder="Superstreet" ng-model="addspace.space.street" required>
+        </div>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" id="housenumber" placeholder="98" ng-model="addspace.space.housenumber" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city" class="col-sm-4 control-label">City + ZIP</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="city" placeholder="Berlin" ng-model="addspace.space.city" required>
+        </div>
+        <div class="col-sm-2">
+          <input type="number" class="form-control" id="zip" placeholder="10406" ng-model="addspace.space.zip" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">Country</label>
+        <div class="col-sm-8">
+          <select class="form-control" ng-options="country for country in addspace.countries" ng-model="addspace.space.country" required></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">Available From</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="from" ng-model="addspace.space.from" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">Available To</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="to" ng-model="addspace.space.to" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="size" class="col-sm-4 control-label">Size</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <div class="input-group-addon">m&sup2;</div>
+            <input type="number" class="form-control" id="size" placeholder="52" ng-model="addspace.space.squareMeters" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cost" class="col-sm-4 control-label">Cost</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <div class="input-group-addon">€</div>
+            <input type="number" class="form-control" id="cost" placeholder="Cost" ng-model="addspace.space.cost" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone" class="col-sm-4 control-label">Phone</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="phone" placeholder="+49 151 135143"  ng-model="addspace.space.phone">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="website" class="col-sm-4 control-label">Website</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="website" ng-model="addspace.space.url" placeholder="https://www.website-of-space.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="col-sm-4 control-label">Description</label>
+        <div class="col-sm-8">
+          <trix-editor angular-trix id="description" ng-model="addspace.space.description"></trix-editor>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category" class="col-sm-4 control-label">Category</label>
+        <div class="col-sm-8">
+          <div class="radio" ng-class='{ category_checked: (category == addspace.space.category) }' ng-repeat="category in addspace.categories">
+            <label>
+              <input
+                  type="radio"
+                  name="category"
+                  value="{{category}}"
+                  ng-model="addspace.space.category"
+                  required> {{category}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+          <button type="button"
+                  class="btn btn-success"
+                  ng-click="addspace.addSpace(addspace.space)">Add Space
+          </button>
+          <button type="button"
+                  class="btn btn-default"
+                  ui-sref="spaces">Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

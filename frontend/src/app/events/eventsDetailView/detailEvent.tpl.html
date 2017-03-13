@@ -1,0 +1,95 @@
+<div class="container detailsevent" ng-if="viewevent.error_message">
+  <div class="col-sm-8 col-sm-offset-1">
+    <div class="errormessage">
+      <p>
+        {{viewevent.error_message}}
+      </p>
+      <p class="navigation">
+        <a ui-sref="events">← Back to all Events</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container detailsevent"  ng-if="!viewevent.error_message">
+  <div class="col-sm-8 col-sm-offset-1">
+    <div class="" ng-if="viewevent.isEventOwner">
+      <button type="button"
+              class="btn btn-success"
+              ui-sref="emailattendees({eventID: viewevent._event._id})">E-Mail attendees
+      </button>
+      <button type="button"
+              class="btn btn-primary"
+              ng-click="viewevent.editEvent(viewevent._event._id)">Edit Event
+      </button>
+      <button type="button"
+              class="btn btn-danger"
+              ng-click="viewevent.deleteEvent(viewevent._event._id)">Delete Event
+      </button>
+    </div>
+    <p class="navigation">
+      <a ui-sref="events">← Back to all events</a>
+    </p>
+    <div class="row">
+      <div class="col-md-5 eventinfo">
+        <h1 class="eventname">{{viewevent._event.name}}</h1>
+        <div class="eventtime">
+          <p><b>From:</b> {{viewevent._event.from | date: 'EEEE, MMM d, y h:mm a'}}</p>
+          <p><b>To:</b> {{viewevent._event.to | date: 'EEEE, MMM d, y h:mm a'}}</p>
+        </div>
+        <div class="eventplace">
+          <b>Where:</b> <a ng-href="http://maps.google.com/?q={{viewevent.address}}" target="_blank">
+            <span>{{viewevent._event.street}} {{viewevent._event.housenumber}}</span>,
+            <span>{{viewevent._event.city}}</span>,
+            <span>{{viewevent._event.country}}</span>
+          </a>
+        </div>
+      </div>
+      <div ng-if="viewevent._event.picture" class="col-md-7 eventimage">
+        <img ng-src="{{viewevent._event.picture}}" alt="Event image" />
+      </div>
+    </div>
+    <div class="eventdescription">
+      <p ng-bind-html="viewevent._event.description">
+      </p>
+    </div>
+    <div class="eventapply" ng-if="!isLoggedIn">
+      <h3>RVSP to this event</h3>
+      <p>
+        Please <a ui-sref="login">login</a> or <a ui-sref="register">register</a> to RVSP to this event!
+      </p>
+    </div>
+    <div class="eventapply" ng-if="!viewevent.hasRVSP && !viewevent.isEventOwner && isLoggedIn">
+      <h3>RVSP to this event</h3>
+      <p>
+        Click here to RVSP to this event:
+        <button type="button"
+                class="btn btn-warning"
+                ng-click="viewevent.rvspUser()">RVSP
+        </button>
+      </p>
+    </div>
+    <div class="eventapply" ng-if="viewevent.hasRVSP && !viewevent.isEventOwner && isLoggedIn">
+      <h3>You are attending this event!</h3>
+      <p>
+        Congrats! You are already on the list to attend this event. In case you changed your mind, please
+        <button type="button"
+                class="btn btn-danger"
+                ng-click="viewevent.unRvspUser()">Respond with No
+        </button>
+      </p>
+    </div>
+    <div class="eventapply" ng-if="viewevent.isEventOwner">
+      <h3>That's your event!</h3>
+      <p>
+        Since you are the host, there is no chance here not to go.
+      </p>
+    </div>
+  </div>
+  <div class="col-md-3 attendees">
+    <h2>Attendees</h2>
+    <div ng-repeat="attendee in viewevent._event.attendees">
+      <span ui-sref="viewprofile.about({userID: attendee.userID})">{{ attendee.name }}</span>
+    </div>
+  </div>
+</div>

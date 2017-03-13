@@ -1,0 +1,49 @@
+<div class="container viewprofile" ng-if="viewprofile.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        {{viewprofile.error_message}}
+      </p>
+      <p class="navigation">
+        <a ui-sref="artists">← Back to all artists</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container viewprofile" ng-if="!viewprofile.error_message">
+  <div class="col-sm-9 col-sm-offset-1">
+    <div class="" ng-if="viewprofile.isOwner && !viewprofile.isPreview">
+      <button type="button"
+              class="btn btn-primary"
+              ng-click="viewprofile.editProfile(viewprofile.user._id)">Edit Profile
+      </button>
+      <button type="button"
+              ui-sref="addproject"
+              class="btn btn-success">Add Project
+      </button>
+      <button type="button"
+              ng-click="viewprofile.setPreview()"
+              class="btn btn-warning">Preview Profile
+      </button>
+    </div>
+    <div class="navigation" ng-if="viewprofile.isOwner && viewprofile.isPreview">
+      <a ng-click="viewprofile.setPreview()" href="">← Back to normal view</a>
+    </div>
+    <div class="row">
+      <div class="col-md-6 userinfo">
+        <h1 class="username">{{viewprofile.user.firstName}} {{viewprofile.user.lastName}}</h1>
+        <span ng-if="viewprofile.user.email"><b>E-Mail:</b><span> <a ng-href="mailto:{{viewprofile.user.email}}">{{viewprofile.user.email}}</a></span></span><br />
+        <b ng-if="viewprofile.user.url">Website:</b> <span> <a ng-href="http://{{viewprofile.user.url}}">{{viewprofile.user.url}}</a></span><br />
+      </div>
+      <div ng-if="viewprofile.user.profilePhoto" class="col-md-6 userphoto">
+        <img ng-src="{{viewprofile.user.profilePhoto}}" alt="User photo" />
+      </div>
+    </div>
+    <ul class="nav nav-tabs">
+      <li role="presentation" ui-sref-active="active"><a href="" ui-sref="viewprofile.about">About</a></li>
+      <li role="presentation" ui-sref-active="active"><a href="" ui-sref="viewprofile.projects">Projects</a></li>
+    </ul>
+    <div ui-view="detailsContent"></div>
+  </div>
+</div>

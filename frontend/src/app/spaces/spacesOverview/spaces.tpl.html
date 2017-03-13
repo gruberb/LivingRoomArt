@@ -1,0 +1,18 @@
+<div class="container spacesoverivew">
+  <h1>Spaces <small>{{allspaces.spaces.length}}</small></h1>
+  <nav>
+    <input id="search_term" name="term" placeholder="Search: name, category, city…" type="text" ng-model="search">
+  </nav>
+  <ul class="spaceslist">
+    <li ng-repeat="space in allspaces.spaces | orderBy:'from' | filter: search" ng-click="allspaces.spaceDetails(space)">
+      <span class="spacecategory">{{space.category}}</span>
+      <span class="spacename">{{space.name}}</span>
+      <div class="right">
+        <span class="spacedate hidden-xs">{{space.from | date : 'MMM d'}} - {{space.to | date : 'MMM d'}} </span>
+        <span class="spacesize hidden-xs">{{space.squareMeters}}m&sup2; </span>
+        <span class="spacecost hidden-xs">{{space.cost}}€ </span>
+        <span class="spacecity">{{space.city}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

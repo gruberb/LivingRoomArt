@@ -1,0 +1,139 @@
+<div class="container addopencall" ng-if="!isLoggedIn">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        You need to be logged in to create a new OpenCall!
+      </p>
+      <p class="navigation">
+        <a ui-sref="opencalls">← Back to all OpenCalls</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container addopencall" ng-if="isLoggedIn">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1>Create a new OpenCall</h1>
+    <p>Sharing art is deeply linked in our culture. Create an OpenCall and invite people to contribute to your art event.
+    </p>
+    <form class="form-horizontal" ng-submit="addopencall.addOpenCall(addopencall.opencall)">
+      <div class="form-group">
+        <label for="opencallName" class="col-sm-4 control-label">Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="opencallName" placeholder="Name of your OpenCall" ng-model="addopencall.opencall.name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
+        <div class="col-sm-8">
+          <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="addopencall.opencall.email" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="file" class="col-sm-4 control-label">Image <br /> (not bigger than 3MB)</label>
+        <div class="col-sm-8 image-upload">
+          <img ngf-src="addopencall.opencall.picture">
+          <input ngf-select
+                  id="file"
+                  type="file"
+                  ngf-capture="'camera'"
+                  ng-model="addopencall.opencall.picture"
+                  ngf-accept="'image/*'"
+                  ngf-max-size="3MB"
+                  ngf-resize="{width: 200, height: 200, quality: .8, type: 'image/jpeg',
+                    ratio: '1:2', centerCrop: true, pattern='.jpg'}">
+          <input ng-if="addopencall.opencall.picture" type="button" name="remove_image" value="Remove" ng-click="addopencall.removeImage()">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="street" class="col-sm-4 control-label">Streetname + Housenr.</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="street" placeholder="Superstreet" ng-model="addopencall.opencall.street" required>
+        </div>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" id="housenumber" placeholder="98" ng-model="addopencall.opencall.housenumber" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city" class="col-sm-4 control-label">City + ZIP</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="city" placeholder="Berlin" ng-model="addopencall.opencall.city" required>
+        </div>
+        <div class="col-sm-2">
+          <input type="number" class="form-control" id="zip" placeholder="10406" ng-model="addopencall.opencall.zip" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">Country</label>
+        <div class="col-sm-8">
+          <select class="form-control" ng-options="country for country in addopencall.countries" ng-model="addopencall.opencall.country" required></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">From</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="from" ng-model="addopencall.opencall.from" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">To</label>
+        <div class="col-sm-8">
+          <input type="datetime-local" class="form-control" id="to" ng-model="addopencall.opencall.to" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone" class="col-sm-4 control-label">Phone</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="phone" placeholder="+49 151 135143"  ng-model="addopencall.opencall.phone">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cost" class="col-sm-4 control-label">Cost</label>
+        <div class="col-sm-8">
+          <div class="input-group">
+            <div class="input-group-addon">€</div>
+            <input type="number" class="form-control" id="cost" ng-model="addopencall.opencall.cost" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="website" class="col-sm-4 control-label">Website</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="website" ng-model="addopencall.opencall.url" placeholder="https://www.website-of-event.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="col-sm-4 control-label">Description</label>
+        <div class="col-sm-8">
+          <trix-editor angular-trix id="description" ng-model="addopencall.opencall.description"></trix-editor>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category" class="col-sm-4 control-label">Category</label>
+        <div class="col-sm-8">
+          <div class="radio" ng-class='{ category_checked: (category == addopencall.opencall.category) }' ng-repeat="category in addopencall.categories">
+            <label>
+              <input
+                  type="radio"
+                  name="category"
+                  value="{{category}}"
+                  ng-model="addopencall.opencall.category"
+                  required> {{category}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+          <button type="submit"
+                  class="btn btn-success">Create OpenCall
+          </button>
+          <button type="button"
+                  class="btn btn-default"
+                  ui-sref="opencalls">Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

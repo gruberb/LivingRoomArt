@@ -1,0 +1,29 @@
+{
+  "name": "OpenDecision",
+  "main": "server.js",
+  "dependencies": {
+    "async": "^1.5.2",
+    "aws-sdk": "^2.2.28",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.12.4",
+    "cors": "^2.7.1",
+    "express": "^4.12.4",
+    "jsonwebtoken": "^5.0.1",
+    "moment": "^2.11.1",
+    "mongoose": "^4.0.4",
+    "morgan": "^1.5.3",
+    "multer": "^1.1.0",
+    "newrelic": "^1.25.0",
+    "node-mailjet": "^1.0.3",
+    "node-uuid": "^1.4.7",
+    "nodemon": "^1.8.1",
+    "passport": "^0.2.2",
+    "passport-http": "^0.2.2",
+    "prerender-node": "^2.2.0",
+    "underscore": "^1.8.3",
+    "validate.js": "^0.7.1"
+  },
+  "devDependencies": {
+    "node-mailjet": "^1.0.3"
+  }
+}

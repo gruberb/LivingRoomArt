@@ -1,0 +1,16 @@
+<div class="container eventsoverview">
+  <h1>Events <small>{{allevents.events.length}}</small></h1>
+  <nav>
+    <input id="search_term" name="term" placeholder="Search: name, category, city…" type="text" ng-model="search">
+  </nav>
+  <ul class="eventslist">
+    <li ng-repeat="_event in allevents.events | orderBy:'from' | filter: search" ng-click="allevents.eventDetails(_event)">
+      <span class="eventcategory">{{_event.category}}</span>
+      <span class="eventname">{{_event.name}}</span>
+      <div class="right">
+        <span class="eventdate hidden-xs">{{_event.from | date : shortDate}}</span>
+        <span class="eventcity">{{_event.city}}</span>
+      </div>
+    </li>
+  </ul>
+</div>

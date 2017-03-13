@@ -1,0 +1,62 @@
+.artistsoverview {
+  h1 {
+    cursor: default;
+    font-family: $mediumfont;
+    letter-spacing: 5px;
+    color: #c00;
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+
+  nav {
+    overflow: hidden;
+    background-color: #efefef;
+    padding: 15px 30px;
+    border-radius: 50px;
+    margin-bottom: 25px;
+    margin-left: -31px;
+    width: 105%;
+
+    input {
+      float: left;
+      background: url(images/search-icon.png) 10px 16px no-repeat #fff;
+      font-size: 1rem;
+      padding: 8px 8px 8px 30px;
+      cursor: auto;
+      width: 98%;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+  }
+
+  .artistslist {
+    list-style: none;
+    padding-left: 0px;
+
+    li {
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+
+      &:nth-child(2) {
+        background-color: rgb(246, 246, 246);
+      };
+
+      &:hover {
+        background-color: #ffc;
+      }
+
+      .artistcategory {
+        font-family: $boldfont;
+        margin-right: 10px;
+      }
+
+      .right {
+        float: right;
+        color: #AA9C84;
+        padding-top: 4px;
+      }
+    }
+  }
+}

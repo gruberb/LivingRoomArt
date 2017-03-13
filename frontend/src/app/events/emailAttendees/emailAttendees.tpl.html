@@ -1,0 +1,38 @@
+<div class="container emailattendees" ng-if="emailattendees.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="errormessage">
+      <p>
+        {{emailattendees.error_message}}
+      </p>
+      <p class="navigation">
+        <a ui-sref="events">← Back to all Events</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container emailattendees" ng-if="!emailattendees.error_message">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1>{{emailattendees._event.name}}</h1>
+    <form class="form-horizontal" ng-submit="emailattendees.sendEmail(emailattendees.email_text)">
+      <div class="form-group">
+        <label for="email" class="col-sm-4 control-label">Text for E-Mail</label>
+        <div class="col-sm-8">
+          <trix-editor angular-trix id="email" ng-model="emailattendees.email_text" required></trix-editor>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-10">
+          <button type="submit"
+                  ng-disabled="!emailattendees.email_text"
+                  class="btn btn-success">Send E-Mail
+          </button>
+          <button type="button"
+                  class="btn btn-default"
+                  ng-click="emailattendees.goBack(emailattendees._event._id)">Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
